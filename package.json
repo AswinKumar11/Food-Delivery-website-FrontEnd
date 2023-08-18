@@ -1,0 +1,33 @@
+{
+  "name": "react1",
+  "version": "1.0.0",
+  "description": "Learning React from scratch",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AswinKumar11/react1.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Aswin Kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AswinKumar11/react1/issues"
+  },
+  "homepage": "https://github.com/AswinKumar11/react1#readme",
+  "devDependencies": {
+    "parcel": "^2.9.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browsersList":[
+    "last 2 versions"
+  ]
+}
