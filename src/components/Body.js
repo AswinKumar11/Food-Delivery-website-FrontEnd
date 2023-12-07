@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { RESTAURANT_DATA } from "../utils/mockData";
 import Card from "./Card";
 import Shimmer from "./Shimmer";
@@ -63,7 +64,9 @@ export const Body = () => {
       ) : (
         <div className="res-container">
           {filteredResData.map((resData) => (
+            // <Link key={resData?.info?.id} to={resData?.info?.id}>
             <Card resData={resData.info} key={resData?.info?.id} />
+            // </Link>
           ))}
         </div>
       )}

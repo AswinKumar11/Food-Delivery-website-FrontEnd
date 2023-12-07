@@ -2,6 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import { Body } from "./components/Body";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import About from "./components/AboutUs";
+import Error from "./components/Error";
+import Menu from "./components/Menu";
 
 // const heading = React.createElement("div", {id:'child'}, [
 //     React.createElement("h1", {key:'child2'}, "Hello Mr.React"),
@@ -16,9 +20,31 @@ import { Body } from "./components/Body";
 const App = () => (
   <div>
     <Header />
-    <Body />
+    <Outlet />
   </div>
 );
 
+const routeConfig = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/:resId",
+        element: <Menu />,
+      },
+    ],
+    errorElement: <Error />
+  },
+]);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(<RouterProvider router={routeConfig} />);
