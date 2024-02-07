@@ -1,29 +1,15 @@
-import { Link } from "react-router-dom";
-import { RESTAURANT_DATA } from "../utils/mockData";
+// import { Link } from "react-router-dom";
+// import { RESTAURANT_DATA } from "../utils/mockData";
 import Card from "./Card";
 import Shimmer from "./Shimmer";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import useResDetails from "../utils/useResDetails";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 export const Body = () => {
-  const [resData, setresData] = useState([]);
-  const [filteredResData, setFilteredResData] = useState([]);
   const [searchText, setSearchText] = useState("");
-  useEffect(() => {
-    fetchData();
-  }, []);
-  async function fetchData() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&page_type=DESKTOP_WEB_LISTING"
-    );
-    const json = await data.json();
-    setresData(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilteredResData(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-  }
-
+  const {resData, filteredResData} = useResDetails();
+  const isOnline = useOnlineStatus(true);
   // if (resData.length === 0){
   //   return <Shimmer />;
   // }
@@ -59,7 +45,7 @@ export const Body = () => {
           Top Rated Restaurants
         </button>
       </div>
-      {resData.length === 0 ? (
+      {typeof resData !== 'undefined' && resData.length === 0 ? (
         <Shimmer />
       ) : (
         <div className="res-container">

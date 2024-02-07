@@ -10,8 +10,8 @@ export default Header = () => {
           alt="my image"
         /></a>
         <div className="nav-bar">
-          <ul> <Link to="/">Home</Link></ul>
-          <ul><Link to="/about">About Us</Link></ul>
+          <ul> <Link to="/" className="link-style">Home</Link></ul>
+          <ul><Link to="/about" className="link-style">About Us</Link></ul>
           <ul>Contact</ul>
           <ul>Cart</ul>
         </div>
