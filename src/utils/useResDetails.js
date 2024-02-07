@@ -20,5 +20,4 @@ const useResDetails = () => {
   }
   return { resData, filteredResData };
 };
-
 export default useResDetails;

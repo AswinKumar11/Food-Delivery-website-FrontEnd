@@ -4,10 +4,12 @@ import Card from "./Card";
 import Shimmer from "./Shimmer";
 import { useState } from "react";
 import useResDetails from "../utils/useResDetails";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 export const Body = () => {
   const [searchText, setSearchText] = useState("");
   const {resData, filteredResData} = useResDetails();
+  const isOnline = useOnlineStatus(true);
   // if (resData.length === 0){
   //   return <Shimmer />;
   // }
