@@ -8,7 +8,7 @@ const Accordion = ({content,title})=>{
             setSelected(!selected);
         }}>
         <h3>{title}</h3>
-        <span>{selected ? <div class="arrow arrow-up"></div> : <div class="arrow arrow-down"></div>}</span>
+        <span>{selected ? <div className="arrow arrow-up"></div> : <div className="arrow arrow-down"></div>}</span>
       </div>
       <div className={selected ? "hideContent" : "showContent"}>{content}</div>
     </div>

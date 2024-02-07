@@ -1,27 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Shimmer from "./Shimmer";
 import MenuCard from "./MenuCard";
-import { MENU_URL } from "../utils/constants";
 import { useParams } from "react-router-dom";
 import Accordion from "./Accordion";
+import useMenuList from "../utils/useMenuList";
 import { CAROUSEL_URL } from "../utils/constants";
 
-const Menu = (props) => {
-  const [menuList, setMenuList] = useState([]);
-  const [resDetails, setResDetails] = useState([]);
-  useEffect(() => {
-    menu();
-  }, []);
+const Menu = () => {
   const { resId } = useParams();
-  const menu = async () => {
-    const data = await fetch(MENU_URL + resId);
-    let json = await data.json();
-    setMenuList(json.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards);
-    setResDetails(json.data.cards[0]);
-    //check here
-    console.log(json);
-    // console.log(json.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards);
-  };
+  const { menuList, resDetails } = useMenuList(resId);
   if (Array.isArray(menuList) && menuList.length == 0) return <Shimmer />;
   return (
     <>
@@ -42,21 +29,15 @@ const Menu = (props) => {
           const menuData = e?.card?.card?.itemCards;
           const caurosel = e?.card?.card?.carousel;
           if (typeof caurosel !== "undefined" && caurosel !== "") {
-            console.log("aswin", caurosel);
-            return <div className="caurosel">{
-              caurosel.map((e2,i)=>{
-                return <img src={CAROUSEL_URL+e2?.creativeId} key={i}/>
-              })
-              }
-            </div>;
-            // return (caurosel.map((e2)=>{
-            //   return (
-            //     <div className="caurosel">
-            //       <img src={CAROUSEL_URL+e2?.creativeId} />
-            //     </div>
-            //   );
-            // }));
-          } else if (typeof menuData !== "undefined" && menuData !== "") {
+            return (
+              <div className="caurosel" key={i}>
+                {caurosel.map((e2) => {
+                  return <img src={CAROUSEL_URL + e2?.creativeId} key={e2.bannerId} />;
+                })}
+              </div>
+            );
+          } 
+          else if (typeof menuData !== "undefined" && menuData !== "") {
             let title = e?.card?.card?.title;
             return (
               <Accordion

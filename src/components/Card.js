@@ -7,7 +7,7 @@ export default Card = (props) => {
       props?.resData;
     return (
       <div className="card">
-        <Link to={id}>
+        <Link to={id} className="link-style">
         <img
           className="card-img"
           src={
