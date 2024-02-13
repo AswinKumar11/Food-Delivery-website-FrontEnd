@@ -8,21 +8,23 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 
 export const Body = () => {
   const [searchText, setSearchText] = useState("");
-  const {resData, filteredResData} = useResDetails();
+  const { resData, filteredResData } = useResDetails();
   const isOnline = useOnlineStatus(true);
   // if (resData.length === 0){
   //   return <Shimmer />;
   // }
   return (
     <div className="body">
-      <div className="search-Bar">
+      <div className="m-2 l-2">
         <input
-        value={searchText}
+          className="m-2 l-2 border-solid border-[2px] border-black rounded-lg"
+          value={searchText}
           onChange={(e) => {
             setSearchText(e.target.value);
           }}
         ></input>
         <button
+          className="m-2 l-2 border-solid border-[1px] border-gray-400 rounded-lg bg-gray-300 hover:bg-gray-500"
           onClick={() => {
             const filteredRes = resData.filter((e) =>
               e.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -30,7 +32,8 @@ export const Body = () => {
             setFilteredResData(filteredRes);
           }}
         >
-          Search
+          {" "}
+          Search{" "}
         </button>
       </div>
       <div className="filter">
@@ -45,10 +48,10 @@ export const Body = () => {
           Top Rated Restaurants
         </button>
       </div>
-      {typeof resData !== 'undefined' && resData.length === 0 ? (
+      {typeof resData !== "undefined" && resData.length === 0 ? (
         <Shimmer />
       ) : (
-        <div className="res-container">
+        <div className="m-2 p-2 flex flex-wrap">
           {filteredResData.map((resData) => (
             // <Link key={resData?.info?.id} to={resData?.info?.id}>
             <Card resData={resData.info} key={resData?.info?.id} />
