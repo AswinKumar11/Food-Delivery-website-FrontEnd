@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Shimmer from "./Shimmer";
 import MenuCard from "./MenuCard";
 import { useParams } from "react-router-dom";
@@ -8,18 +8,19 @@ import { CAROUSEL_URL } from "../utils/constants";
 
 const Menu = () => {
   const { resId } = useParams();
+  const [img,setImage] = useState(0);
   const { menuList, resDetails } = useMenuList(resId);
   if (Array.isArray(menuList) && menuList.length == 0) return <Shimmer />;
   return (
     <>
-      <div className="res-details">
+      <div className="m-2 mx-48 p-2 flex flex-nowrap justify-between border-solid border-2 bg-gray-100">
         <div className="res-locality">
-          <h4>{resDetails?.card?.card?.info?.name}</h4>
+          <h4 className="font-extrabold">{resDetails?.card?.card?.info?.name}</h4>
           <p>{resDetails?.card?.card?.info?.cuisines.join(",")}</p>
-          <p>{resDetails?.card?.card?.info?.areaName}</p>
+          <p className="font-thin">{resDetails?.card?.card?.info?.areaName}</p>
         </div>
         <div className="res-rating">
-          <p>{resDetails?.card?.card?.info?.avgRating.toString()}</p>
+          <p>{resDetails?.card?.card?.info?.avgRating.toString()+"⭐️"}</p>
           <hr></hr>
           <p>{resDetails?.card?.card?.info?.totalRatingsString}</p>
         </div>
@@ -29,11 +30,19 @@ const Menu = () => {
           const menuData = e?.card?.card?.itemCards;
           const caurosel = e?.card?.card?.carousel;
           if (typeof caurosel !== "undefined" && caurosel !== "") {
+            {console.log(img);}
             return (
-              <div className="caurosel" key={i}>
-                {caurosel.map((e2) => {
+              <div className="p-2 flex flex-nowrap w-[40%] m-auto items-center" key={i}>
+              <span className="mr-10" onClick={()=>{
+                if(img>0) setImage(img-1)
+              }}>◀</span>
+                {/* {caurosel.map((e2) => {
                   return <img src={CAROUSEL_URL + e2?.creativeId} key={e2.bannerId} />;
-                })}
+                })} */}
+                <img src={CAROUSEL_URL + caurosel[img]?.creativeId} key={caurosel[img].bannerId} />
+              <span className="ml-10" onClick={()=>{
+                if(img<caurosel.length-1)setImage(img+1)
+              }}>▶️</span>
               </div>
             );
           } 
