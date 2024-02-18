@@ -1,11 +1,12 @@
-import React from "react";
+import React,{Suspense, lazy} from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import { Body } from "./components/Body";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import About from "./components/AboutUs";
 import Error from "./components/Error";
-import Menu from "./components/Menu";
+// import About from "./components/AboutUs";
+// import Menu from "./components/Menu";
+// import SpecificFood from "./components/SpecificFood";
 
 // const heading = React.createElement("div", {id:'child'}, [
 //     React.createElement("h1", {key:'child2'}, "Hello Mr.React"),
@@ -17,10 +18,16 @@ import Menu from "./components/Menu";
 
 // functional component
 
+const About = lazy(() => import('./components/AboutUs'));
+const Menu = lazy(() => import('./components/Menu'));
+const SpecificFood = lazy(() => import('./components/SpecificFood'));
+
 const App = () => (
   <div>
     <Header />
+    <Suspense>
     <Outlet />
+    </Suspense>
   </div>
 );
 
@@ -41,6 +48,14 @@ const routeConfig = createBrowserRouter([
         path: "/:resId",
         element: <Menu />,
       },
+      {
+        path: "/specificFood/:id",
+        element: <SpecificFood />,
+      },
+      {
+        path: "/specificFood/:id/:resId",
+        element: <Menu />,
+      }
     ],
     errorElement: <Error />
   },

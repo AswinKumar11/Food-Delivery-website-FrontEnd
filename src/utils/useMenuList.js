@@ -12,6 +12,7 @@ const useMenuList = (resId) => {
     let json = await data.json();
     setMenuList(json.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards);
     setResDetails(json.data.cards[0]);
+    console.log(json.data);
   };
 
   return {menuList, resDetails};
