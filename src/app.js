@@ -1,9 +1,12 @@
-import React,{Suspense, lazy} from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import { Body } from "./components/Body";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Error from "./components/Error";
+import { Provider } from "react-redux";
+import reduxStore from "./utils/reduxStore";
+import Cart from "./components/Cart";
 // import About from "./components/AboutUs";
 // import Menu from "./components/Menu";
 // import SpecificFood from "./components/SpecificFood";
@@ -18,16 +21,19 @@ import Error from "./components/Error";
 
 // functional component
 
-const About = lazy(() => import('./components/AboutUs'));
-const Menu = lazy(() => import('./components/Menu'));
-const SpecificFood = lazy(() => import('./components/SpecificFood'));
+const About = lazy(() => import("./components/AboutUs"));
+const Menu = lazy(() => import("./components/Menu"));
+const SpecificFood = lazy(() => import("./components/SpecificFood"));
+
 
 const App = () => (
   <div>
-    <Header />
-    <Suspense>
-    <Outlet />
-    </Suspense>
+    <Provider store={reduxStore}>
+      <Header />
+      <Suspense>
+        <Outlet />
+      </Suspense>
+    </Provider>
   </div>
 );
 
@@ -55,9 +61,13 @@ const routeConfig = createBrowserRouter([
       {
         path: "/specificFood/:id/:resId",
         element: <Menu />,
-      }
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
     ],
-    errorElement: <Error />
+    errorElement: <Error />,
   },
 ]);
 
