@@ -74,6 +74,7 @@ const Menu = () => {
               <Accordion
                 key={i}
                 content={menuData.map((e1) => {
+                  e1.card.info.quantity = 0;
                   const cardData = e1.card.info;
                   return <MenuCard key={cardData.id} cardData={cardData} />;
                 })}

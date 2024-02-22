@@ -39,9 +39,9 @@ const SpecificFood = () => {
       <h3 className="text-xl text-gray-300 pt-2">
         {specificFoodHeader.description}
       </h3>
-      <h1 className="font-bold text-2xl text-gray-700 mt-4">
+      {typeof specificFoodHeader.count !== 'undefined' ?<h1 className="font-bold text-2xl text-gray-700 mt-4">
         {specificFoodHeader.count + " to explore"}
-      </h1>
+      </h1>:<h1></h1>}
       <div className="flex flex-wrap pt-2">
         {typeof specificFoodData !== "undefined" &&
         specificFoodData !== "" &&

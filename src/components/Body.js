@@ -59,7 +59,7 @@ export const Body = () => {
           )}
         </div>
       </div>
-      <div className="">
+      {/* <div className="">
         <input
           className="m-2 l-2 border-solid border-[2px] border-black rounded-lg"
           value={searchText}
@@ -91,7 +91,7 @@ export const Body = () => {
         >
           Top Rated Restaurants
         </button>
-      </div>
+      </div> */}
       {typeof resData !== "undefined" && resData.length === 0 ? (
         <Shimmer />
       ) : (
