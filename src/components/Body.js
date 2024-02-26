@@ -9,10 +9,11 @@ import { CDN_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 
 export const Body = () => {
-  const [searchText, setSearchText] = useState("");
+  // const [searchText, setSearchText] = useState("");
   const { resData, filteredResData, imageGridHeader, imageGridData, topRestaurants, topRestaurantsGridHeader } =
     useResDetails();
-  const isOnline = useOnlineStatus(true);
+  const isOnline = useOnlineStatus();
+  // console.log(isOnline);
   const PromotedRestaurant = promotedRes(Card);
   // if (resData.length === 0){
   //   return <Shimmer />;
