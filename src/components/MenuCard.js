@@ -1,17 +1,21 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CDN_URL } from "../utils/constants";
-import { addItem, removeItem } from "../utils/cartSlice";
+import { addItem, clearCart, removeItem } from "../utils/cartSlice";
 import { useState } from "react";
 
-const MenuCard = ({ cardData }) => {
+const MenuCard = ({ cardData, resId }) => {
   const { name, description, defaultPrice, imageId, price } = cardData;
+  const cartResId = useSelector((store) => store.cart.resId);
   const dispatch = useDispatch();
   const [count, setCount] = useState(0);
-  const addToCart = (cardData) => {
-    dispatch(addItem(cardData));
+  const addToCart = (cardData, resId) => {
+    dispatch(addItem({ cardData, resId }));
   };
   const removeCart = (cardData) => {
     dispatch(removeItem(cardData));
+  };
+  const clearCartOfOldRes = ()=>{
+    dispatch(clearCart());
   };
   return (
     <div className="m-5 p-5 flex rounded-lg border-solid border-gray-50 bg-gray-50 hover:bg-gray-200 justify-between">
@@ -26,7 +30,12 @@ const MenuCard = ({ cardData }) => {
             className="mx-3 px-3 border-green-500 border-2 rounded-lg bg-gray-100 hover:bg-gray-300 absolute bottom-3"
             onClick={() => {
               setCount(count + 1);
-              addToCart(cardData);
+              if (cartResId===0 || cartResId === resId) {
+                addToCart(cardData, resId);
+              } else {
+                clearCartOfOldRes();
+                addToCart(cardData, resId);
+              }
             }}
           >
             Add
@@ -46,7 +55,7 @@ const MenuCard = ({ cardData }) => {
             <button
               className="pl-1"
               onClick={() => {
-                setCount((prevCount)=> prevCount+1);
+                setCount((prevCount) => prevCount + 1);
                 addToCart(cardData);
               }}
             >

@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Accordion from "./Accordion";
 import useMenuList from "../utils/useMenuList";
 import { CAROUSEL_URL } from "../utils/constants";
+import Modal from "./Modal";
 
 const Menu = () => {
   const { resId } = useParams();
@@ -76,7 +77,7 @@ const Menu = () => {
                 content={menuData.map((e1) => {
                   e1.card.info.quantity = 0;
                   const cardData = e1.card.info;
-                  return <MenuCard key={cardData.id} cardData={cardData} />;
+                  return <MenuCard key={cardData.id} cardData={cardData} resId={resId} />;
                 })}
                 title={title}
               />
@@ -84,6 +85,7 @@ const Menu = () => {
           }
         })}
       </div>
+      {/* <Modal /> */}
     </>
   );
 };
