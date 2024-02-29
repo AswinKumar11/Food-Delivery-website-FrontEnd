@@ -11,8 +11,8 @@ const useMenuList = (resId) => {
     const data = await fetch(MENU_URL + resId);
     let json = await data.json();
     // console.log(json.data);
-    setMenuList(json.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards);
-    setResDetails(json.data.cards[2]);
+    setMenuList(json.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards);
+    setResDetails(json.data.cards[0]);
     // console.log(json.data);
   };
 
